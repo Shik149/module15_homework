@@ -1,0 +1,57 @@
+<style type="text/css">
+    .btn {
+        padding: 0;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+        box-shadow: none;
+        cursor: pointer;
+
+        display: flex;
+        margin: 5px 10px;
+        padding: 10px 15px;
+        border-radius: 1px;
+        font-size: 12px;
+        line-height: 15px;
+        text-transform: uppercase;
+        color: white;
+        background: #315efb;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        box-shadow: 0px 2px 8px 2px rgba(141,150,178,.3);
+        transform: scale(1.05);
+    }
+</style>
+
+<button class="btn">Узнать время</button>
+<div class="timezone"></div>
+<div class="date_time_txt"></div>
+
+<script type="text/javascript">
+    const btn = document.querySelector('.btn');
+    const timeZone = document.querySelector('.timezone');
+    const dateTimeTXT = document.querySelector('.date_time_txt');
+
+    btn.addEventListener('click', () => {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                const { coords } = position; //coords.longitude coords.latitude
+                const latitude = coords.latitude;
+                const longitude = coords.longitude;
+                fetch(`https://api.ipgeolocation.io/timezone?apiKey=32bcd4a6e4b548968e7afcdb682ac679&lat=${latitude}&long=${longitude}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        //console.log(data);
+                        timeZone.innerHTML = '<p>Временная зона: ' + data.timezone + '</p>';
+                        dateTimeTXT.innerHTML = '<p>Местная дата и время: ' + data.date_time_txt + '</p>';
+                    })
+            })
+        }
+        else {
+            loca.innerHTML = '<p>Информация о местоположении недоступна</p>';
+        }
+    });
+</script>

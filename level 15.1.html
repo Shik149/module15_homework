@@ -1,0 +1,17 @@
+<button class="btn flag">Показать флаги</button>
+<div class="flag-cntr"></div>
+
+<script type="text/javascript">
+    const btn = document.querySelector('.flag');
+    const pic = document.querySelector('.flag-cntr');
+
+    btn.addEventListener('click', () => {
+        pic.innerHTML = `
+      <img src="https://atuin.ru/demo/flag-icon-css-master/flags/4x3/ru.svg" height="180" width="120"></img>
+      <img src="https://atuin.ru/demo/flag-icon-css-master/flags/4x3/fr.svg" height="180" width="120"></img>
+      <img src="https://atuin.ru/demo/flag-icon-css-master/flags/4x3/fi.svg" height="180" width="120"></img>
+      <img src="https://atuin.ru/demo/flag-icon-css-master/flags/4x3/ch.svg" height="180" width="120"></img>
+      <img src="https://atuin.ru/demo/flag-icon-css-master/flags/4x3/jp.svg" height="180" width="120"></img>
+    `;
+    });
+</script>
